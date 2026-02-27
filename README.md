@@ -1,126 +1,108 @@
-# AI RAG System – Production-Ready Grounded AI Backend
+# AIKnowledgeAssistant
 
-This project is a production-style Retrieval-Augmented Generation (RAG) system built using FastAPI and a local Large Language Model.
+AIKnowledgeAssistant is a SwiftUI-based iOS application that connects to a custom Retrieval-Augmented Generation (RAG) backend to provide grounded, real-time AI responses.
 
-It demonstrates how to build reliable, grounded AI systems that retrieve knowledge before generating answers, measure confidence, and reduce hallucinations.
-
-This is not just a chatbot. It is a full AI system architecture suitable for real-world deployment.
+This project was built to demonstrate how to integrate a production-style AI system into a mobile app — not just connect to a generic language model.
 
 ---
 
-## What This Project Is
-
-This system is an AI question-answering backend that:
-
-* Stores and indexes documents
-* Breaks content into structured chunks
-* Converts text into semantic embeddings
-* Performs vector similarity search
-* Retrieves relevant knowledge
-* Generates answers grounded in retrieved content
-* Scores confidence
-* Refuses low-confidence responses
-* Streams answers in real time
-
-It represents a complete AI pipeline from ingestion to generation.
-
----
-
-## How It Works
+## What This App Does
 
 When a user asks a question:
 
-1. The question is converted into an embedding.
-2. The system searches for the most relevant document chunks.
-3. Hybrid ranking improves retrieval precision.
-4. Context length is controlled to avoid model overload.
-5. A prompt is built using only retrieved content.
-6. The local LLM generates an answer.
-7. Confidence is calculated from similarity scores.
-8. Grounding validation checks if the answer is sufficiently supported.
-9. If confidence is too low, the system refuses to answer.
-10. The response is returned (or streamed token-by-token).
+* The app sends the request to a RAG backend.
+* The backend retrieves relevant information from indexed documents.
+* A local language model generates an answer using only that retrieved context.
+* The response streams back token by token.
+* The UI updates progressively in real time.
 
-This architecture ensures answers are based on real information rather than pure generation.
+Instead of waiting for a full response, the answer appears naturally as it is generated.
 
 ---
 
-## Core Features
+## Why This Project Is Different
 
-* Document ingestion and indexing
-* Chunking with overlap
-* Embedding generation
-* Vector similarity search
-* Hybrid semantic + keyword ranking
-* Context length management
-* Confidence normalization
-* Hallucination refusal logic
-* Grounding validation layer
+Many AI apps simply forward prompts to a language model and display whatever it returns.
+
+AIKnowledgeAssistant is different because:
+
+* It retrieves relevant knowledge before generating answers.
+* It measures confidence based on similarity scores.
+* It can refuse low-confidence responses.
+* It validates grounding to reduce hallucinations.
+* It streams responses live for better user experience.
+
+This project demonstrates real AI system architecture, not just API usage.
+
+---
+
+## Features
+
+* Built entirely in SwiftUI
 * Real-time streaming responses
-* Performance metrics tracking
-* In-memory caching
+* Clean networking layer using URLSession
+* Progressive UI updates
+* Works with a grounded RAG backend
+* Confidence-aware response handling
+* Modular and scalable structure
 
 ---
 
-## Real-World Use Cases
+## Architecture
 
-This system can power:
+User Input
+→ AIService (Networking Layer)
+→ FastAPI RAG Backend
+→ Local LLM (Ollama)
+→ Streaming Tokens
+→ Real-Time UI Updates
 
-### 1. Company Knowledge Assistant
-
-Employees can query internal documents, policies, SOPs, or manuals. The AI answers using only company-approved content.
-
-### 2. Legal or Compliance Assistant
-
-Contracts and regulations can be indexed and queried safely with grounding validation.
-
-### 3. Healthcare or Research Tool
-
-Research papers and guidelines can be retrieved and referenced before answer generation.
-
-### 4. SaaS AI Copilot
-
-Integrated into CRM, finance, or analytics platforms to answer contextual product questions.
-
-### 5. E-Learning AI Tutor
-
-Students can ask questions about course materials and receive answers grounded in their syllabus.
-
----
-
-## API Endpoints
-
-POST /ingest
-POST /ask
-POST /ask-stream
-
-* `/ask` returns a complete response.
-* `/ask-stream` streams token-by-token responses for real-time applications.
+Streaming is handled using `URLSessionDataDelegate`, allowing the app to process data as it arrives.
 
 ---
 
 ## Technology Stack
 
-* Python
-* FastAPI
+* Swift
+* SwiftUI
+* URLSession (streaming implementation)
+* FastAPI backend
 * Local LLM via Ollama
-* Embedding generation
-* Vector search
-* Custom grounding and refusal layer
-
-Runs locally without external AI API dependency.
 
 ---
 
-## Why This Project Matters
+## Real-World Applications
 
-This project demonstrates the ability to:
+This architecture can be adapted for:
 
-* Design AI system architecture
-* Build Retrieval-Augmented Generation pipelines
-* Implement hallucination mitigation strategies
-* Integrate local large language models
-* Build streaming APIs
-* Create production-ready AI services
+* Company knowledge assistants
+* Enterprise document search
+* AI copilots inside SaaS platforms
+* Internal support tools
+* Educational AI tutoring systems
 
-It represents an end-to-end AI system suitable for enterprise, startup, and SaaS applications.
+The system is designed to power real products.
+
+---
+
+## Running the App
+
+1. Make sure the backend server is running.
+2. If testing on a physical device, replace `127.0.0.1` with your Mac’s local IP address.
+3. Open the project in Xcode.
+4. Build and run.
+5. Ask a question and watch the response stream live.
+
+---
+
+## Why I Built This
+
+AIKnowledgeAssistant was built as part of a full-stack AI engineering portfolio to demonstrate:
+
+* End-to-end AI system design
+* Retrieval-Augmented Generation
+* Streaming AI responses
+* Backend and mobile integration
+* Production-style reliability patterns
+
+This project reflects practical AI engineering applied to real-world mobile applications.
