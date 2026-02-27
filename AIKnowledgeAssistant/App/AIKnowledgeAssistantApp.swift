@@ -11,7 +11,7 @@ import SwiftUI
 struct AIKnowledgeAssistantApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ChatView()
         }
     }
 }

@@ -6,17 +6,26 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BF40D4D82F52475800B1F8E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF40D4D52F52475800B1F8E1 /* Assets.xcassets */; };
+		BF40D4D92F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4D42F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift */; };
+		BF40D4E22F5247D100B1F8E1 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E12F5247D100B1F8E1 /* AIService.swift */; };
+		BF40D4E42F5247F300B1F8E1 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E32F5247F300B1F8E1 /* ChatViewModel.swift */; };
+		BF40D4E62F52485A00B1F8E1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E52F52485A00B1F8E1 /* ChatView.swift */; };
+		BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */; };
+		BF40D4EA2F524E3900B1F8E1 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E92F524E3900B1F8E1 /* MessageBubble.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		BF40D4C62F52475000B1F8E1 /* AIKnowledgeAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIKnowledgeAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF40D4D42F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIKnowledgeAssistantApp.swift; sourceTree = "<group>"; };
+		BF40D4D52F52475800B1F8E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BF40D4E12F5247D100B1F8E1 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
+		BF40D4E32F5247F300B1F8E1 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		BF40D4E52F52485A00B1F8E1 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		BF40D4E92F524E3900B1F8E1 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		BF40D4C82F52475000B1F8E1 /* AIKnowledgeAssistant */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AIKnowledgeAssistant;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BF40D4C32F52475000B1F8E1 /* Frameworks */ = {
@@ -32,7 +41,7 @@
 		BF40D4BD2F52475000B1F8E1 = {
 			isa = PBXGroup;
 			children = (
-				BF40D4C82F52475000B1F8E1 /* AIKnowledgeAssistant */,
+				BF40D4D72F52475800B1F8E1 /* AIKnowledgeAssistant */,
 				BF40D4C72F52475000B1F8E1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +52,68 @@
 				BF40D4C62F52475000B1F8E1 /* AIKnowledgeAssistant.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BF40D4D72F52475800B1F8E1 /* AIKnowledgeAssistant */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4DB2F52476500B1F8E1 /* App */,
+				BF40D4DC2F52476E00B1F8E1 /* Assets */,
+				BF40D4DD2F52478800B1F8E1 /* Models */,
+				BF40D4DE2F52478F00B1F8E1 /* Services */,
+				BF40D4DF2F52479500B1F8E1 /* ViewModels */,
+				BF40D4E02F5247A600B1F8E1 /* View */,
+			);
+			path = AIKnowledgeAssistant;
+			sourceTree = "<group>";
+		};
+		BF40D4DB2F52476500B1F8E1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4D42F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BF40D4DC2F52476E00B1F8E1 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4D52F52475800B1F8E1 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		BF40D4DD2F52478800B1F8E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF40D4DE2F52478F00B1F8E1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4E12F5247D100B1F8E1 /* AIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BF40D4DF2F52479500B1F8E1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4E32F5247F300B1F8E1 /* ChatViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF40D4E02F5247A600B1F8E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF40D4E52F52485A00B1F8E1 /* ChatView.swift */,
+				BF40D4E92F524E3900B1F8E1 /* MessageBubble.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +130,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				BF40D4C82F52475000B1F8E1 /* AIKnowledgeAssistant */,
 			);
 			name = AIKnowledgeAssistant;
 			packageProductDependencies = (
@@ -109,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF40D4D82F52475800B1F8E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +188,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF40D4E62F52485A00B1F8E1 /* ChatView.swift in Sources */,
+				BF40D4EA2F524E3900B1F8E1 /* MessageBubble.swift in Sources */,
+				BF40D4D92F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift in Sources */,
+				BF40D4E42F5247F300B1F8E1 /* ChatViewModel.swift in Sources */,
+				BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */,
+				BF40D4E22F5247D100B1F8E1 /* AIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
