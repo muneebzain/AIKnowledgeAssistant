@@ -1,8 +1,14 @@
+Perfect. I’ll rewrite it in a more natural, human tone — like a real engineer explaining their project, not like AI marketing copy.
+
+Here’s the updated README:
+
+---
+
 # AIKnowledgeAssistant
 
-AIKnowledgeAssistant is a SwiftUI-based iOS application that connects to a custom Retrieval-Augmented Generation (RAG) backend to provide grounded, real-time AI responses.
+AIKnowledgeAssistant is a SwiftUI-based iOS app that connects to a custom Retrieval-Augmented Generation (RAG) backend to deliver grounded, real-time AI responses.
 
-This project was built to demonstrate how to integrate a production-style AI system into a mobile app — not just connect to a generic language model.
+I built this project to demonstrate how a real AI system works end to end — not just how to send prompts to a language model, but how to design retrieval, safety checks, streaming, and persistence in a production-style architecture.
 
 ---
 
@@ -10,54 +16,74 @@ This project was built to demonstrate how to integrate a production-style AI sys
 
 When a user asks a question:
 
-* The app sends the request to a RAG backend.
-* The backend retrieves relevant information from indexed documents.
-* A local language model generates an answer using only that retrieved context.
-* The response streams back token by token.
-* The UI updates progressively in real time.
+1. The app sends the request to a FastAPI RAG backend.
+2. The backend retrieves relevant information from indexed documents.
+3. A local LLM (running via Ollama) generates an answer using only that retrieved context.
+4. The response streams back token by token.
+5. The UI updates live as the answer is generated.
+6. The conversation is automatically saved on the device.
 
-Instead of waiting for a full response, the answer appears naturally as it is generated.
+Instead of waiting for a full response, the answer appears progressively, creating a natural and responsive experience.
+
+When the app is reopened, the previous conversation is restored automatically.
+
+---
+
+## Persistent Chat Memory
+
+The app now includes built-in conversation memory.
+
+Messages are saved locally using JSON storage. Streaming responses are persisted safely without affecting performance, and the entire chat is restored when the app launches again.
+
+There is also a “New Chat” option that clears the conversation and resets the session.
+
+This turns the app from a simple demo into a proper conversational interface.
 
 ---
 
 ## Why This Project Is Different
 
-Many AI apps simply forward prompts to a language model and display whatever it returns.
+Many AI apps simply forward a prompt to a language model and display whatever comes back.
 
-AIKnowledgeAssistant is different because:
+This project takes a more structured approach:
 
-* It retrieves relevant knowledge before generating answers.
-* It measures confidence based on similarity scores.
+* It retrieves relevant knowledge before generating an answer.
+* It calculates confidence based on similarity scores.
 * It can refuse low-confidence responses.
-* It validates grounding to reduce hallucinations.
-* It streams responses live for better user experience.
+* It checks grounding to reduce hallucination risk.
+* It streams responses in real time.
+* It maintains conversation state locally.
 
-This project demonstrates real AI system architecture, not just API usage.
+The goal was to build something that reflects real AI system design rather than just API integration.
 
 ---
 
 ## Features
 
-* Built entirely in SwiftUI
-* Real-time streaming responses
-* Clean networking layer using URLSession
-* Progressive UI updates
-* Works with a grounded RAG backend
-* Confidence-aware response handling
-* Modular and scalable structure
+* Built entirely with SwiftUI
+* Real-time streaming using URLSessionDataDelegate
+* Persistent chat memory
+* Clean networking architecture
+* Retrieval-Augmented Generation backend
+* Confidence-based response handling
+* Refusal logic for unreliable answers
+* Modular structure for scalability
 
 ---
 
-## Architecture
+## Architecture Overview
 
 User Input
-→ AIService (Networking Layer)
-→ FastAPI RAG Backend
+→ ChatViewModel
+→ AIService (network layer)
+→ FastAPI RAG backend
+→ Vector retrieval + context building
 → Local LLM (Ollama)
-→ Streaming Tokens
-→ Real-Time UI Updates
+→ Streaming response
+→ SwiftUI updates
+→ Local message persistence
 
-Streaming is handled using `URLSessionDataDelegate`, allowing the app to process data as it arrives.
+Streaming allows the UI to update as tokens arrive instead of waiting for the full response.
 
 ---
 
@@ -66,43 +92,35 @@ Streaming is handled using `URLSessionDataDelegate`, allowing the app to process
 * Swift
 * SwiftUI
 * URLSession (streaming implementation)
-* FastAPI backend
-* Local LLM via Ollama
+* FastAPI
+* ChromaDB (vector storage)
+* Ollama (local LLM)
+* Local JSON persistence
 
 ---
 
-## Real-World Applications
+## Real-World Use Cases
 
 This architecture can be adapted for:
 
-* Company knowledge assistants
+* Internal company knowledge assistants
 * Enterprise document search
-* AI copilots inside SaaS platforms
-* Internal support tools
-* Educational AI tutoring systems
+* AI copilots inside SaaS tools
+* Customer support systems
+* Educational assistants
 
-The system is designed to power real products.
+The backend and mobile integration are designed with production-style patterns in mind.
 
 ---
 
 ## Running the App
 
-1. Make sure the backend server is running.
-2. If testing on a physical device, replace `127.0.0.1` with your Mac’s local IP address.
+1. Make sure the FastAPI backend is running.
+2. If using a physical device, replace `127.0.0.1` with your Mac’s local IP address.
 3. Open the project in Xcode.
 4. Build and run.
 5. Ask a question and watch the response stream live.
 
----
+You can close and reopen the app to see that the conversation persists.
 
-## Why I Built This
 
-AIKnowledgeAssistant was built as part of a full-stack AI engineering portfolio to demonstrate:
-
-* End-to-end AI system design
-* Retrieval-Augmented Generation
-* Streaming AI responses
-* Backend and mobile integration
-* Production-style reliability patterns
-
-This project reflects practical AI engineering applied to real-world mobile applications.
