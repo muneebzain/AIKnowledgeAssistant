@@ -1,9 +1,3 @@
-Perfect. I’ll rewrite it in a more natural, human tone — like a real engineer explaining their project, not like AI marketing copy.
-
-Here’s the updated README:
-
----
-
 # AIKnowledgeAssistant
 
 AIKnowledgeAssistant is a SwiftUI-based iOS app that connects to a custom Retrieval-Augmented Generation (RAG) backend to deliver grounded, real-time AI responses.
