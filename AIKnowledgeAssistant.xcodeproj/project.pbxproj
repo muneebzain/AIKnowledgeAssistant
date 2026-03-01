@@ -13,7 +13,7 @@
 		BF40D4E42F5247F300B1F8E1 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E32F5247F300B1F8E1 /* ChatViewModel.swift */; };
 		BF40D4E62F52485A00B1F8E1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E52F52485A00B1F8E1 /* ChatView.swift */; };
 		BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */; };
-		BF40D4EA2F524E3900B1F8E1 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E92F524E3900B1F8E1 /* MessageBubble.swift */; };
+		BF40D4EA2F524E3900B1F8E1 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E92F524E3900B1F8E1 /* ChatBubble.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		BF40D4E32F5247F300B1F8E1 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		BF40D4E52F52485A00B1F8E1 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
-		BF40D4E92F524E3900B1F8E1 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
+		BF40D4E92F524E3900B1F8E1 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				BF40D4E52F52485A00B1F8E1 /* ChatView.swift */,
-				BF40D4E92F524E3900B1F8E1 /* MessageBubble.swift */,
+				BF40D4E92F524E3900B1F8E1 /* ChatBubble.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,7 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF40D4E62F52485A00B1F8E1 /* ChatView.swift in Sources */,
-				BF40D4EA2F524E3900B1F8E1 /* MessageBubble.swift in Sources */,
+				BF40D4EA2F524E3900B1F8E1 /* ChatBubble.swift in Sources */,
 				BF40D4D92F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift in Sources */,
 				BF40D4E42F5247F300B1F8E1 /* ChatViewModel.swift in Sources */,
 				BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */,

@@ -8,32 +8,37 @@
 import Foundation
 import Combine
 
-@MainActor
-class ChatViewModel: ObservableObject {
-    
+final class ChatViewModel: ObservableObject {
     @Published var messages: [ChatMessage] = []
-    @Published var inputText: String = ""
-    @Published var isLoading: Bool = false
-    
+    @Published var input: String = ""
+
     func send() {
-        guard !inputText.isEmpty else { return }
-        
-        let userMessage = ChatMessage(text: inputText, isUser: true)
-        messages.append(userMessage)
-        
-        let question = inputText
-        inputText = ""
-        
-        let aiMessage = ChatMessage(text: "", isUser: false)
-        messages.append(aiMessage)
-        
-        isLoading = true
-        
-        AIService.shared.streamAnswer(question: question) { token in
-            
-            if let index = self.messages.lastIndex(where: { !$0.isUser }) {
-                self.messages[index].text += token
+        let question = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !question.isEmpty else { return }
+        input = ""
+
+        // 1) User message
+        messages.append(ChatMessage(isUser: true, text: question))
+
+        // 2) Assistant placeholder (streaming)
+        messages.append(ChatMessage(isUser: false, text: "", isStreaming: true))
+        let assistantIndex = messages.count - 1
+
+        AIService.shared.streamAnswer(
+            question: question,
+            onToken: { [weak self] token in
+                guard let self else { return }
+                self.messages[assistantIndex].text += token
+            },
+            onComplete: { [weak self] in
+                guard let self else { return }
+                self.messages[assistantIndex].isStreaming = false   // ✅ remove loader
+            },
+            onError: { [weak self] error in
+                guard let self else { return }
+                self.messages[assistantIndex].isStreaming = false
+                self.messages[assistantIndex].text = "Error: \(error.localizedDescription)"
             }
-        }
+        )
     }
 }
