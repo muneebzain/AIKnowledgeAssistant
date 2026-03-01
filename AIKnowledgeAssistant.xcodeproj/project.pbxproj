@@ -14,6 +14,7 @@
 		BF40D4E62F52485A00B1F8E1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E52F52485A00B1F8E1 /* ChatView.swift */; };
 		BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */; };
 		BF40D4EA2F524E3900B1F8E1 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E92F524E3900B1F8E1 /* ChatBubble.swift */; };
+		BFF1D1EF2F54446C00421234 /* ChatMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D1EE2F54446C00421234 /* ChatMemoryStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		BF40D4E52F52485A00B1F8E1 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		BF40D4E72F524DD800B1F8E1 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		BF40D4E92F524E3900B1F8E1 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		BFF1D1EE2F54446C00421234 /* ChatMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemoryStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				BF40D4DB2F52476500B1F8E1 /* App */,
 				BF40D4DC2F52476E00B1F8E1 /* Assets */,
+				BFF1D1ED2F54444D00421234 /* DataStore */,
 				BF40D4DD2F52478800B1F8E1 /* Models */,
 				BF40D4DE2F52478F00B1F8E1 /* Services */,
 				BF40D4DF2F52479500B1F8E1 /* ViewModels */,
@@ -114,6 +117,14 @@
 				BF40D4E92F524E3900B1F8E1 /* ChatBubble.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BFF1D1ED2F54444D00421234 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				BFF1D1EE2F54446C00421234 /* ChatMemoryStore.swift */,
+			);
+			path = DataStore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 			files = (
 				BF40D4E62F52485A00B1F8E1 /* ChatView.swift in Sources */,
 				BF40D4EA2F524E3900B1F8E1 /* ChatBubble.swift in Sources */,
+				BFF1D1EF2F54446C00421234 /* ChatMemoryStore.swift in Sources */,
 				BF40D4D92F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift in Sources */,
 				BF40D4E42F5247F300B1F8E1 /* ChatViewModel.swift in Sources */,
 				BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */,

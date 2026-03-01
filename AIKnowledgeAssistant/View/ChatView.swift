@@ -45,7 +45,13 @@ struct ChatView: View {
         HStack {
             Text("AIKnowledgeAssistant")
                 .font(.headline)
+
             Spacer()
+
+            Button("New Chat") {
+                vm.newChat()
+            }
+            .font(.subheadline)
         }
         .padding()
         .background(Color(.secondarySystemBackground))
