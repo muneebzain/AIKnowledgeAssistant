@@ -35,27 +35,27 @@ become searchable instantly.
 
 ## Key Features
 
--   Built entirely in SwiftUI\
--   Real-time streaming using `URLSessionDataDelegate`\
--   Local persistent chat memory (JSON-based storage)\
--   "New Chat" reset functionality\
--   PDF upload and ingestion support\
--   Clean MVVM architecture\
--   Modular networking layer\
+-   Built entirely in SwiftUI
+-   Real-time streaming using
+-   Local persistent chat memory (JSON-based storage)
+-   "New Chat" reset functionality
+-   PDF upload and ingestion support
+-   Clean MVVM architecture
+-   Modular networking layer
 -   Global document search across all uploaded files
 
 ------------------------------------------------------------------------
 
 ## Architecture
 
-User Input\
-→ ChatViewModel\
-→ AIService (Networking Layer)\
-→ FastAPI RAG Backend\
-→ Vector Retrieval + Hybrid Ranking\
-→ Local LLM (Ollama)\
-→ Streaming Tokens\
-→ Progressive UI Update\
+User Input
+→ ChatViewModel
+→ AIService (Networking Layer)
+→ FastAPI RAG Backend
+→ Vector Retrieval + Hybrid Ranking
+→ Local LLM (Ollama)
+→ Streaming Tokens
+→ Progressive UI Update
 → Local Message Persistence
 
 Streaming ensures the UI updates as tokens arrive instead of waiting for
@@ -65,12 +65,12 @@ a full response.
 
 ## Technology Stack
 
--   Swift\
--   SwiftUI\
--   URLSession (streaming implementation)\
--   MVVM Architecture\
--   JSON Local Storage\
--   FastAPI Backend\
+-   Swift
+-   SwiftUI
+-   URLSession (streaming implementation)
+-   MVVM Architecture
+-   JSON Local Storage
+-   FastAPI Backend
 -   Ollama (Local LLM)
 
 ------------------------------------------------------------------------
@@ -90,10 +90,10 @@ a full response.
 
 This app was built to demonstrate:
 
--   End-to-end RAG architecture\
--   Real-time AI streaming\
--   Grounded answer generation\
--   Mobile and backend AI integration\
+-   End-to-end RAG architecture
+-   Real-time AI streaming
+-   Grounded answer generation
+-   Mobile and backend AI integration
 -   Production-style AI reliability patterns
 
 It reflects applied AI engineering rather than simple prompt-based chat
