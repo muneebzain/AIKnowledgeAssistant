@@ -7,27 +7,16 @@
 
 import Foundation
 
-final class AIService: NSObject, URLSessionDataDelegate {
+final class AIService {
 
     static let shared = AIService()
-    private override init() {}
+    private init() {}
 
     private let baseURL = "http://127.0.0.1:8000"
 
-    private var onTokenReceived: ((String) -> Void)?
-    private var onCompleted: (() -> Void)?
-    private var onError: ((Error) -> Void)?
-
-    private lazy var session: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 300
-        config.timeoutIntervalForResource = 300
-        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
-    }()
-
+    // MARK: - Streaming Answer
     func streamAnswer(
         question: String,
-        topK: Int = 3,
         onToken: @escaping (String) -> Void,
         onComplete: @escaping () -> Void,
         onError: @escaping (Error) -> Void
@@ -38,35 +27,65 @@ final class AIService: NSObject, URLSessionDataDelegate {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = [
-            "question": question,
-            "top_k": topK
-        ]
+        let body: [String: Any] = ["question": question]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        self.onTokenReceived = onToken
-        self.onCompleted = onComplete
-        self.onError = onError
+        Task {
+            do {
+                let (bytes, response) = try await URLSession.shared.bytes(for: request)
+                guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+                    throw NSError(domain: "AIService", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])
+                }
 
-        session.dataTask(with: request).resume()
-    }
+                for try await line in bytes.lines {
+                    if line.isEmpty { continue }
+                    onToken(line)
+                }
 
-    // Called multiple times during streaming
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        guard let chunk = String(data: data, encoding: .utf8), !chunk.isEmpty else { return }
-        DispatchQueue.main.async {
-            self.onTokenReceived?(chunk)
-        }
-    }
-
-    // Called once when stream ends
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        DispatchQueue.main.async {
-            if let error = error {
-                self.onError?(error)
-            } else {
-                self.onCompleted?()
+                onComplete()
+            } catch {
+                onError(error)
             }
         }
+    }
+
+    // MARK: - Ingest Document
+    func ingestDocument(
+        docId: String,
+        text: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        guard let url = URL(string: "\(baseURL)/ingest") else { return }
+
+        let payload: [String: Any] = [
+            "doc_id": docId,
+            "text": text
+        ]
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+
+                guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+                    completion(.failure(NSError(
+                        domain: "AIService",
+                        code: 0,
+                        userInfo: [NSLocalizedDescriptionKey: "Ingest failed. Server returned an error."]
+                    )))
+                    return
+                }
+
+                completion(.success(()))
+            }
+        }
+        task.resume()
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF22E2CF2F55815600E67E5D /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2CE2F55815600E67E5D /* PDFKit.framework */; };
+		BF22E2D12F55817100E67E5D /* PDFService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF22E2D02F55817100E67E5D /* PDFService.swift */; };
 		BF40D4D82F52475800B1F8E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF40D4D52F52475800B1F8E1 /* Assets.xcassets */; };
 		BF40D4D92F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4D42F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift */; };
 		BF40D4E22F5247D100B1F8E1 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D4E12F5247D100B1F8E1 /* AIService.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF22E2CE2F55815600E67E5D /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
+		BF22E2D02F55817100E67E5D /* PDFService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFService.swift; sourceTree = "<group>"; };
 		BF40D4C62F52475000B1F8E1 /* AIKnowledgeAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIKnowledgeAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF40D4D42F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIKnowledgeAssistantApp.swift; sourceTree = "<group>"; };
 		BF40D4D52F52475800B1F8E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,16 +38,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF22E2CF2F55815600E67E5D /* PDFKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF22E2CD2F55815600E67E5D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF22E2CE2F55815600E67E5D /* PDFKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BF40D4BD2F52475000B1F8E1 = {
 			isa = PBXGroup;
 			children = (
 				BF40D4D72F52475800B1F8E1 /* AIKnowledgeAssistant */,
+				BF22E2CD2F55815600E67E5D /* Frameworks */,
 				BF40D4C72F52475000B1F8E1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				BF40D4E12F5247D100B1F8E1 /* AIService.swift */,
+				BF22E2D02F55817100E67E5D /* PDFService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -205,6 +220,7 @@
 				BF40D4D92F52475800B1F8E1 /* AIKnowledgeAssistantApp.swift in Sources */,
 				BF40D4E42F5247F300B1F8E1 /* ChatViewModel.swift in Sources */,
 				BF40D4E82F524DD800B1F8E1 /* ChatMessage.swift in Sources */,
+				BF22E2D12F55817100E67E5D /* PDFService.swift in Sources */,
 				BF40D4E22F5247D100B1F8E1 /* AIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

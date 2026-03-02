@@ -6,39 +6,41 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ChatView: View {
+
     @StateObject private var vm = ChatViewModel()
+    @State private var showPDFPicker = false
 
     var body: some View {
         VStack(spacing: 0) {
+
             header
 
-            ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVStack(spacing: 12) {
-                        ForEach(vm.messages) { msg in
-                            ChatBubble(message: msg)
-                                .id(msg.id)
-                        }
-                    }
-                    .padding(.horizontal, 14)
-                    .padding(.top, 12)
-                    .padding(.bottom, 12)
-                }
-                // Scroll when messages added
-                .onChange(of: vm.messages.count) { _ in
-                    scrollToBottom(proxy)
-                }
-                // Scroll while last message text changes (streaming)
-                .onChange(of: vm.messages.last?.text) { _ in
-                    scrollToBottom(proxy)
-                }
-            }
+            Divider()
+
+            uploadStatusBar
+
+            messagesList
+
+            Divider()
 
             inputBar
         }
-        .background(Color(.systemGroupedBackground))
+        .fileImporter(
+            isPresented: $showPDFPicker,
+            allowedContentTypes: [.pdf],
+            allowsMultipleSelection: false
+        ) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first else { return }
+                vm.ingestPDF(from: url)
+            case .failure(let error):
+                vm.uploadStatusText = "File selection error: \(error.localizedDescription)"
+            }
+        }
     }
 
     private var header: some View {
@@ -48,41 +50,80 @@ struct ChatView: View {
 
             Spacer()
 
+            Button("Upload PDF") {
+                showPDFPicker = true
+            }
+            .font(.subheadline)
+
             Button("New Chat") {
                 vm.newChat()
             }
             .font(.subheadline)
+            .padding(.leading, 8)
         }
         .padding()
         .background(Color(.secondarySystemBackground))
         .overlay(Divider(), alignment: .bottom)
     }
 
+    private var uploadStatusBar: some View {
+        Group {
+            if vm.isUploadingDoc {
+                HStack(spacing: 10) {
+                    ProgressView()
+                    Text(vm.uploadStatusText.isEmpty ? "Uploading..." : vm.uploadStatusText)
+                        .font(.caption)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+            } else if !vm.uploadStatusText.isEmpty {
+                HStack {
+                    Text(vm.uploadStatusText)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+            }
+        }
+    }
+
+    private var messagesList: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(spacing: 12) {
+                    ForEach(vm.messages) { msg in
+                        ChatBubble(message: msg)
+                            .id(msg.id)
+                    }
+                }
+                .padding()
+            }
+            .onChange(of: vm.messages) { _, _ in
+                guard let lastId = vm.messages.last?.id else { return }
+                withAnimation(.easeOut(duration: 0.2)) {
+                    proxy.scrollTo(lastId, anchor: .bottom)
+                }
+            }
+            .onAppear {
+                guard let lastId = vm.messages.last?.id else { return }
+                proxy.scrollTo(lastId, anchor: .bottom)
+            }
+        }
+    }
+
     private var inputBar: some View {
         HStack(spacing: 10) {
             TextField("Ask something...", text: $vm.input, axis: .vertical)
-                .lineLimit(1...4)
                 .textFieldStyle(.roundedBorder)
+                .lineLimit(1...4)
 
-            Button {
-                vm.send()
-            } label: {
-                Image(systemName: "paperplane.fill")
-                    .font(.system(size: 16, weight: .semibold))
+            Button("Send") {
+                vm.sendMessage()
             }
-            .disabled(vm.input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding()
-        .background(Color(.secondarySystemBackground))
-        .overlay(Divider(), alignment: .top)
-    }
-
-    private func scrollToBottom(_ proxy: ScrollViewProxy) {
-        guard let last = vm.messages.last else { return }
-        DispatchQueue.main.async {
-            withAnimation(.easeOut(duration: 0.2)) {
-                proxy.scrollTo(last.id, anchor: .bottom)
-            }
-        }
     }
 }

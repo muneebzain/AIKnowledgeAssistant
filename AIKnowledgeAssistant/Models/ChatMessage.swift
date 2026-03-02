@@ -9,21 +9,27 @@
 import Foundation
 
 struct ChatMessage: Identifiable, Codable, Equatable {
+    enum Role: String, Codable {
+        case user
+        case assistant
+        case system
+    }
+
     let id: UUID
-    let isUser: Bool
+    let role: Role
     var text: String
     var isStreaming: Bool
     let createdAt: Date
 
     init(
         id: UUID = UUID(),
-        isUser: Bool,
+        role: Role,
         text: String,
         isStreaming: Bool = false,
         createdAt: Date = Date()
     ) {
         self.id = id
-        self.isUser = isUser
+        self.role = role
         self.text = text
         self.isStreaming = isStreaming
         self.createdAt = createdAt
