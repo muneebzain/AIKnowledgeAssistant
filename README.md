@@ -1,120 +1,102 @@
-# AIKnowledgeAssistant
+AIKnowledge Assistant (iOS)
+Overview
 
-AIKnowledgeAssistant is a SwiftUI-based iOS app that connects to a custom Retrieval-Augmented Generation (RAG) backend to deliver grounded, real-time AI responses.
+AIKnowledge Assistant is a SwiftUI-based iOS application that connects to a custom Retrieval-Augmented Generation (RAG) backend to provide grounded, real-time AI responses based on uploaded documents.
 
-I built this project to demonstrate how a real AI system works end to end — not just how to send prompts to a language model, but how to design retrieval, safety checks, streaming, and persistence in a production-style architecture.
+This is not a generic chat app. It is built to demonstrate a production-style AI system that retrieves relevant context before generating answers, reducing hallucinations and improving reliability.
 
----
+The app streams responses live, maintains chat memory locally, and supports document ingestion for global knowledge search.
 
-## What This App Does
+What the App Does
 
 When a user asks a question:
 
-1. The app sends the request to a FastAPI RAG backend.
-2. The backend retrieves relevant information from indexed documents.
-3. A local LLM (running via Ollama) generates an answer using only that retrieved context.
-4. The response streams back token by token.
-5. The UI updates live as the answer is generated.
-6. The conversation is automatically saved on the device.
+The question is sent to a FastAPI RAG backend.
 
-Instead of waiting for a full response, the answer appears progressively, creating a natural and responsive experience.
+The backend retrieves relevant document chunks using vector + hybrid search.
 
-When the app is reopened, the previous conversation is restored automatically.
+A local LLM (via Ollama) generates a grounded response.
 
----
+The answer streams back token by token.
 
-## Persistent Chat Memory
+The UI updates progressively in real time.
 
-The app now includes built-in conversation memory.
+The conversation is saved locally for persistence.
 
-Messages are saved locally using JSON storage. Streaming responses are persisted safely without affecting performance, and the entire chat is restored when the app launches again.
+Users can upload PDF documents, which are ingested into the backend and become searchable instantly.
 
-There is also a “New Chat” option that clears the conversation and resets the session.
+Key Features
 
-This turns the app from a simple demo into a proper conversational interface.
+Built entirely in SwiftUI
 
----
+Real-time streaming using URLSessionDataDelegate
 
-## Why This Project Is Different
+Local persistent chat memory (JSON-based storage)
 
-Many AI apps simply forward a prompt to a language model and display whatever comes back.
+“New Chat” reset functionality
 
-This project takes a more structured approach:
+PDF upload and ingestion support
 
-* It retrieves relevant knowledge before generating an answer.
-* It calculates confidence based on similarity scores.
-* It can refuse low-confidence responses.
-* It checks grounding to reduce hallucination risk.
-* It streams responses in real time.
-* It maintains conversation state locally.
+Clean MVVM architecture
 
-The goal was to build something that reflects real AI system design rather than just API integration.
+Modular networking layer
 
----
+Global document search across all uploaded files
 
-## Features
-
-* Built entirely with SwiftUI
-* Real-time streaming using URLSessionDataDelegate
-* Persistent chat memory
-* Clean networking architecture
-* Retrieval-Augmented Generation backend
-* Confidence-based response handling
-* Refusal logic for unreliable answers
-* Modular structure for scalability
-
----
-
-## Architecture Overview
+Architecture
 
 User Input
 → ChatViewModel
-→ AIService (network layer)
-→ FastAPI RAG backend
-→ Vector retrieval + context building
+→ AIService (Networking Layer)
+→ FastAPI RAG Backend
+→ Vector Retrieval + Hybrid Ranking
 → Local LLM (Ollama)
-→ Streaming response
-→ SwiftUI updates
-→ Local message persistence
+→ Streaming Tokens
+→ Progressive UI Update
+→ Local Message Persistence
 
-Streaming allows the UI to update as tokens arrive instead of waiting for the full response.
+Streaming ensures the UI updates as tokens arrive instead of waiting for a full response.
 
----
+Technology Stack
 
-## Technology Stack
+Swift
 
-* Swift
-* SwiftUI
-* URLSession (streaming implementation)
-* FastAPI
-* ChromaDB (vector storage)
-* Ollama (local LLM)
-* Local JSON persistence
+SwiftUI
 
----
+URLSession (streaming implementation)
 
-## Real-World Use Cases
+MVVM Architecture
 
-This architecture can be adapted for:
+JSON Local Storage
 
-* Internal company knowledge assistants
-* Enterprise document search
-* AI copilots inside SaaS tools
-* Customer support systems
-* Educational assistants
+FastAPI Backend
 
-The backend and mobile integration are designed with production-style patterns in mind.
+Ollama (Local LLM)
 
----
+Running the App
 
-## Running the App
+Make sure the backend server is running.
 
-1. Make sure the FastAPI backend is running.
-2. If using a physical device, replace `127.0.0.1` with your Mac’s local IP address.
-3. Open the project in Xcode.
-4. Build and run.
-5. Ask a question and watch the response stream live.
+Replace 127.0.0.1 with your Mac’s local IP if testing on a physical device.
 
-You can close and reopen the app to see that the conversation persists.
+Open the project in Xcode.
 
+Build and run.
 
+Upload PDFs and start asking questions.
+
+Purpose
+
+This app was built to demonstrate:
+
+End-to-end RAG architecture
+
+Real-time AI streaming
+
+Grounded answer generation
+
+Mobile + backend AI integration
+
+Production-style AI reliability patterns
+
+It reflects applied AI engineering rather than simple prompt-based chat.
